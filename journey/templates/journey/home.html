@@ -1,0 +1,30 @@
+    {% extends "journey/base.html" %}
+    {% load static %}
+   {% block content %}
+  <div class="row m-4">
+    {% for journey in journies %}
+   
+         <div class="col-sm-4">
+               <div class="container mt-3 mb-3">
+                     <div class="card">
+                              
+                        <h5 class="card-header"><i class="fas fa-car"></i> {{ journey.depature }}  <i class="fas fa-angle-double-right" ></i> {{ journey.destination }}</h5>
+                          <div class="card-body">
+                          <h5 class="card-title">{{ journey.date_travel }}</h5>
+                          <p><p class="card-text">Posted By {{ journey.posted_by }}</p>
+                          <!--<img class="rounded-circle"src="{{ journey.posted_by.profile.image.url}}" alt=""></p>-->
+                          <a href="{% url 'trip-detail' journey.id %}" class="btn btn-success">VIEW RIDE</a>
+                              </div>
+                            </div>
+                        </div>
+         </div>
+    
+    
+    {% endfor %}
+    </div>
+  
+           
+    {% endblock content %}
+
+  
+    

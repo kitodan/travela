@@ -1,0 +1,26 @@
+{% extends "journey/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-6 offset-3">
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="badge badge-info border-bottom mb-4"> <h2>LOGIN</h2> </legend>
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                            <button class="btn btn-info" type="submit">LOGIN</button>
+                    </div>
+                </form>
+                <div class="border-top pt-3">
+                    <a href="{% url 'register'%}">dont have an account? Register Here!</a>
+                </div>
+                
+            
+        </div>
+    </div>
+</div>
+{% endblock content %}
