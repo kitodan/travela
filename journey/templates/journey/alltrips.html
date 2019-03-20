@@ -1,0 +1,43 @@
+{% extends "journey/base.html" %}
+{% load static %}
+{% block content %}
+<div class="row m-4">
+{% for journey in journies %}
+
+     <div class="col-sm-4">
+           <div class="container mt-3 mb-3">
+                 <div class="card">
+                          
+                    <h5 class="card-header"><i class="fas fa-car"></i> {{ journey.depature }}  <i class="fas fa-angle-double-right" ></i> {{ journey.destination }}</h5>
+                      <div class="card-body">
+                      <h5 class="card-title">{{ journey.date_travel }}</h5>
+                      <p><p class="card-text">Posted By {{ journey.posted_by }}</p>
+                      <!--<img class="rounded-circle"src="{{ journey.posted_by.profile.image.url}}" alt=""></p>-->
+                      <a href="{% url 'trip-detail' journey.id %}" class="btn btn-success">VIEW RIDE</a>
+                          </div>
+                        </div>
+                    </div>
+     </div>
+{% endfor %}
+</div>
+{% if is_paginated %}
+
+     {% if page_obj.has_previous %}
+     <a href="?page=1" class="btn btn-outline-info mb-4">First</a>
+     
+     {% endif %}
+{% for num in page_obj.paginator.page_range %}
+     {% if page_obj.number == num %}
+     <a href="?page={{ num }}" class="btn btn-info mb-4 mr-2">{{ num }}</a>
+     {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+     <a href="?page={{ num }}" class="btn btn-outline-info mb-4">{{ num }}</a>
+     {% endif %}
+{% endfor %}
+{% if page_obj.next %}
+     <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-info mb-4">Next</a>
+     <a href="{{ page_obj.paginator.num_pages }}" class="btn btn-outline-info mb-4">Last</a>
+{% endif %}
+{% endif %}
+       
+{% endblock content %}
+

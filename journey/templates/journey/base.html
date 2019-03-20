@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!--fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'journey/style.css' %}">
+    <style rel="stylesheet" type="text/css">
+       .asteriskField{
+         display: none;
+       }
+       .navbar{
+        background-color:#009FB9;
+       }
+       #hint_id_password1{
+         display: none;
+       }
+       #hint_id_username{
+         display: none;
+       }
+       #hint_id_password2{
+         display: none;
+       }
+       #footer {
+        background-color: #009FB9;
+        color:white;
+      }
+      
+      #footer .footer-copyright{
+        background-color: #383737;
+        padding-top:3px;
+        padding-bottom:3px;
+        text-align: center;
+      }
+      
+      #footer .footer-copyright p{
+        margin:10px;
+        color: #ccc;
+      }
+      
+      #footer ul{
+        list-style-type: none;
+          padding-left: 0;
+          line-height: 1.7;
+      
+      }
+      
+      #footer h5{
+        font-size: 18px;
+          color: white;
+          font-weight: bold;
+          margin-top: 30px;
+      }
+      
+      #footer a{
+        color:#d2d1d1;
+        text-decoration: none;
+      }
+      
+      #footer a:hover, #myFooter a:focus{
+        text-decoration: none;
+        color:white;
+      }
+      
+      #myFooter .myCols{
+        text-align: center;
+      }
+      
+      #myFooter .social-networks{
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 38px;
+      }
+      
+      #myFooter .social-networks a{
+          font-size: 32px;
+          margin-right: 5px;
+          margin-left: 5px;
+          color: #f9f9f9;
+          padding: 10px;
+          transition: 0.2s;
+      }
+      
+      #footer .social-networks a:hover{
+        text-decoration: none;
+      
+      }
+      
+      #footer .facebook:hover{
+        color:#0077e2;
+      }
+      
+      #footer .google:hover{
+        color:#ef1a1a;
+      }
+      
+      #footer .twitter:hover{
+        color: #00aced;
+      }
+      
+      @media screen and (max-width: 767px){
+        #footer {
+          text-align: center;
+        }
+      }
+      
+      
+      
+      /* CSS used for positioning the footers at the bottom of the page. */
+      /* You can remove this. */
+      
+      
+      html{
+        height: 100% !important;
+      }
+      
+      body{
+          display: flex;
+          display: -webkit-flex;
+          flex-direction: column;
+          -webkit-flex-direction: column;
+          height: 100%;
+      }
+      
+      .content{
+        flex: 1 0 auto;
+        -webkit-flex: 1 0 auto;
+        min-height: 200px;
+      }
+      
+      #footer{
+        flex: 0 0 auto;
+          -webkit-flex: 0 0 auto;
+      }
+       
+       
+    </style>
+  </head>
+  <body>
+       <div class="section" id="header">
+        <nav class="navbar navbar-expand-lg navbar-light  mt-3">
+          <a class="navbar-brand" href="{% url 'journey-home' %}">LIFTSHARE</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+              <li class="nav-item">
+                  <a class="nav-link " href="#"><i class="fas fa-comments mr-2"> Messages</i></a>
+                
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'journey-all' %}"><i class="fas fa-list-ul"> All Rides</i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'trip-create' %}"><i class="fas fa-plus-circle mr-3"> Offer Ride</i></a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-user-alt"></i> {{ user.username }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                  <a class="dropdown-item" href="#">Reset Password</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"> Logout</i></a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'register' %}">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'login' %}">Login</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
+       </div>
+    {% if messages %}
+    {% for message in messages %}
+   <div class="container">
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+   </div>
+   
+    {% endfor %}
+    {% endif %}
+    <div class="container">  {% block content %} {% endblock %}</div>
+     <footer id="footer">
+      <div class="container " >
+        <div class="row" >
+          <div class="col-sm-4 ">
+             <h5>Quick Links</h5>
+             <ul>
+               <li><a href="#">How To Use LiftShare</a></li>
+               <li><a href="#">About Us</a></li>
+               <li><a href="#">Support</a></li>
+           </ul>
+          </div>
+          <div class="col-sm-4 ">
+           <h5>Get Started</h5>
+           <ul>
+             <li><a href="#">Company Information</a></li>
+             <li><a href="#">Contact us</a></li>
+             <li><a href="#">Reviews</a></li>
+         </ul>
+         </div>
+         <div class="col-sm-4">
+           <h5>Contact Info</h5>
+           <ul>
+             <li><a href="#"><i class="fab fa-facebook"> Information</i> </a></li>
+             <li><a href="#"><i class="fab fa-instagram"> Contact</i> </a></li>
+             <li><a href="#"><i class="fas fa-phone"> Reviews</i></a></li>
+         </ul>
+         </div>
+        </div>
+      </div>
+        <div class="footer-copyright">
+            <p>© 2019 All Rights Reserved </p> <p>Developed by Thomas And Daniel </p>
+        </div>
+     </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>

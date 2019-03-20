@@ -1,0 +1,17 @@
+{% extends "journey/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div class="container mt-3">
+    <div class="alert alert-danger" role="alert">
+        You have been logged out!
+      </div>
+    <div class="border-top pt-3">
+        <a href="{% url 'login'%}">Login Again
+            
+        </a>
+    </div>
+    
+</div>
+{% endblock content %}
